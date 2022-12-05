@@ -20,6 +20,21 @@ def handle_hello():
 
 
 @api.route('/signup', methods=['POST'])
+def signup():
+    data = request.json
+    user = User.query.filter_by(email=data['user']).first()
+
+    if user:
+        return jsonify({"msg": "No se puede crear este usuario"}), 401
+    else:
+        user = User(email=data['user'], password=data['pwd'], is_active=True)
+        db.session.add(user)
+        db.session.commit()
+        access_token = create_access_token(identity=data['user'])
+        return jsonify(access_token=access_token), 200
+
+
+@api.route('/login', methods=['GET'])
 def login():
     data = request.json
 
@@ -33,26 +48,6 @@ def login():
         return jsonify(access_token=access_token), 200
     else:
         return jsonify({"msg": "Bad username or password"}), 401
-
-
-
-@api.route('/login', methods=['POST'])
-def login():
-    data = request.json
-
-    emailUser = data.get("user", None)
-    pwd = data.get("pwd", None)
-
-    user = User.query.filter_by(email=emailUser).filter_by(password=pwd).first()
-
-    if user:
-        access_token = create_access_token(identity=emailUser)
-        return jsonify(access_token=access_token), 200
-    else:
-        return jsonify({"msg": "Bad username or password"}), 401
-
-
-
 
 
 
