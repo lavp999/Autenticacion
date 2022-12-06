@@ -19,6 +19,24 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
+@api.route('/inicializa/<int:count>', methods=['POST'])
+def insert_test_data(count):
+    print("Creating test users")
+    for x in range(1, int(count) + 1):
+        user = User()
+        user.email = "test_user" + str(x) + "@test.com"
+        user.password = "123456"
+        user.is_active = True
+        db.session.add(user)
+        db.session.commit()
+        print("User: ", user.email, " created.")
+
+    print("All test users created")
+
+    ### Insert the code to populate others tables if needed
+
+
+
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
