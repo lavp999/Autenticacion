@@ -13,9 +13,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			tokenUser: ""			
 		},
 		actions: {
+			// Cargar la variable Token de usuario
+			asignaToken: (miToken) => {
+				setStore({tokenUser: miToken});
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
