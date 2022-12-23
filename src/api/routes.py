@@ -77,27 +77,21 @@ def get_user():
 
     return jsonify(user.serialize()), 200
 
+#para probar y saber cuantos tengo
+@api.route('/members', methods=['GET'])
+def get_members():
+    print("hola")
 
+    data = User.query.all()
+    users = []
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if data:
+        for user in data:
+            users.append(user.serialize())
+            
+        return jsonify(users), 200
+    else:
+        return jsonify({"msg": "No existen usuarios"}), 401
 
 
 
