@@ -14,9 +14,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			tokenUser: ""			
+			tokenUser: "",
+			datosSignup: {user: "inicial",
+						  pwd: "inicial"
+						 }		
 		},
 		actions: {
+			// Guardamos datos de usuario en el signup
+			setSignup: (usuario, pass) => {
+				const misDatos = {user: usuario,
+								  pwd: pass}
+
+				setStore({ datosSignup: misDatos });
+				// console.log("Estos son mis datos: ", misDatos);
+			},
+			// retornamos datos de usuario en el signup
+			getSignup: () => {
+				return getStore().datosSignup;
+			},
 			// Cargar la variable Token de usuario
 			asignaToken: (miToken) => {
 				setStore({tokenUser: miToken});

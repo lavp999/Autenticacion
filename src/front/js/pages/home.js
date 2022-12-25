@@ -17,9 +17,9 @@ export const Home = () => {
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
 			</div>
 			<div className="alert alert-info">
-				<Link to="/signup" type="button" class="btn btn-primary mx-3">SignUp</Link>
-				<Link to="/login" type="button" class="btn btn-secondary mx-3">Login</Link>
-				<Link to="/private" type="button" class="btn btn-success mx-3">Private</Link>
+				<Link to="/signup" type="button" className="btn btn-primary mx-3">SignUp</Link>
+				<Link to="/login" type="button" className="btn btn-secondary mx-3">Login</Link>
+				<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>
 			</div>
 			<p>
 				This boilerplate comes with lots of documentation:{" "}
