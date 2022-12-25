@@ -1,40 +1,49 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
+import React, { useState } from "react";
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Signup = () => {
-	const { store, actions } = useContext(Context);
+	const [formData, setFormData] = useState({});
+	const navega = useNavigate();
 
-	const guardaDatos = () => {
-		var email = document.getElementById("InputEmail").value;
-		var pwd = document.getElementById("InputPassword").value;
+	const handleChange = (evento) =>{
+		setFormData({...formData, [evento.target.name]: evento.target.value});
+	}
 
-		actions.setSignup(email, pwd);
+	const handleSubmit = (evento)=>{
+		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
+		console.log("Antes:", formData, process.env.BACKEND_URL)
+
+		fetch("https://3000-lavp999-autenticacion-x52hovsqz4q.ws-eu80.gitpod.io/api/signup", 
+			  {method: 'POST',
+			   headers:{"Content-Type": "application/json"},
+			   body: JSON.stringify(formData),
+			  })
+		.then(response => response.json())
+		.then((response)=>{console.log(response)})
 	}
 
 	return (
 		<div className="text-center mt-5">
 			<h1>Esta es la pagina de alta</h1>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<div className="row">
 					<div className="col form-group">
-						<input type="email" className="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email" value="usuario@mail.com" />
+						<input type="email" className="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email" onChange={handleChange}/>
 						<small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
 					</div>
 					<div className="col form-group">
-						<input type="password" className="form-control" id="InputPassword" placeholder="Password"/>
+						<input type="password" className="form-control" id="InputPassword" placeholder="Password" name="pwd" onChange={handleChange}/>
 					</div>
-					<div className="col form-check">
-						<input type="checkbox" className="form-check-input" id="Check1" />
-						<label className="form-check-label" for="Check1">Check me out</label>
+					<div className="col">
+						<button type="submit" className="btn btn-primary mx-3" id="button1" name="boton">Alta usuario</button>
 					</div>
 				</div>
 			</form>
 
 
 			<div className="alert alert-info">
-				<Link to="/okSignup" type="button" onClick={guardaDatos} className="btn btn-primary mx-3">SignUp</Link>
+				{/*<Link to="/okSignup" type="button" onClick={guardaDatos} className="btn btn-primary mx-3">SignUp</Link> */} 
 				<Link to="/" type="button" className="btn btn-success mx-3">Home</Link>
 			</div>
 		</div>

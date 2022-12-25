@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			//--------------------------------------------------------------------
-			// Guardamos datos de usuario en el signup
+			// Guardamos datos de usuario en el signup 
 			//--------------------------------------------------------------------
 			setSignup: (usuario, pass) => {
 				const misDatos = {user: usuario,
