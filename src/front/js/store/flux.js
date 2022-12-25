@@ -20,23 +20,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 						 }		
 		},
 		actions: {
+			//--------------------------------------------------------------------
 			// Guardamos datos de usuario en el signup
+			//--------------------------------------------------------------------
 			setSignup: (usuario, pass) => {
 				const misDatos = {user: usuario,
 								  pwd: pass}
 
-				setStore({ datosSignup: misDatos });
-				// console.log("Estos son mis datos: ", misDatos);
+				try{
+					// Validamos datos de entrada
+					// ------------
+					// Buscamos si existe el usuario
+					
+
+					setStore({ datosSignup: misDatos });
+					// console.log("Estos son mis datos: ", misDatos);
+						return data;
+				}catch(error){
+					console.log("Error en la validación de datos", error)
+				}
 			},
+			//--------------------------------------------------------------------
 			// retornamos datos de usuario en el signup
+			//--------------------------------------------------------------------
 			getSignup: () => {
 				return getStore().datosSignup;
 			},
+
+
+
+			//--------------------------------------------------------------------
 			// Cargar la variable Token de usuario
+			//--------------------------------------------------------------------
 			asignaToken: (miToken) => {
 				setStore({tokenUser: miToken});
 			},
+
+
+
+
+
+
+
+
+			//--------------------------------------------------------------------
 			// Use getActions to call a function within a fuction
+			//--------------------------------------------------------------------
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},

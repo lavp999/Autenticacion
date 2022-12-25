@@ -9,7 +9,7 @@ export const Signup = () => {
 	const guardaDatos = () => {
 		var email = document.getElementById("InputEmail").value;
 		var pwd = document.getElementById("InputPassword").value;
-		
+
 		actions.setSignup(email, pwd);
 	}
 

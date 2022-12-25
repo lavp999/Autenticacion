@@ -6,7 +6,12 @@ export const OkSignUp = () => {
 
     const misDatos = () => {
         const misDatos = actions.getSignup();
-        console.log("Este es mi usuario: ",misDatos["user"]);
+/*
+        @api.route('/signup', methods=['POST'])
+        def signup():
+  */
+
+        // console.log("Este es mi usuario: ",misDatos["user"]);
         return misDatos["user"];
     }
 
