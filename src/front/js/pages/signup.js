@@ -12,15 +12,16 @@ export const Signup = () => {
 
 	const handleSubmit = (evento)=>{
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("Antes:", formData, process.env.BACKEND_URL)
+		// console.log("Antes:", formData, process.env.BACKEND_URL)
 
-		fetch("https://3000-lavp999-autenticacion-x52hovsqz4q.ws-eu80.gitpod.io/api/signup", 
+		fetch(process.env.BACKEND_URL + "/api/signup", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(formData),
 			  })
 		.then(response => response.json())
 		.then((response)=>{console.log(response)})
+
 	}
 
 	return (
@@ -29,7 +30,7 @@ export const Signup = () => {
 			<form onSubmit={handleSubmit}>
 				<div className="row">
 					<div className="col form-group">
-						<input type="email" className="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email" onChange={handleChange}/>
+						<input type="email" className="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="user" onChange={handleChange}/>
 						<small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
 					</div>
 					<div className="col form-group">
