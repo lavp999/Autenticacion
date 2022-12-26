@@ -12,14 +12,14 @@ export const Login = () => {
 	}
 	const hacerLogin = (evento) => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		const data = {"user": formData["user"], "pwd": formData["pwd"]}
+		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
 		console.log("Antes:", data, process.env.BACKEND_URL)
 
 		fetch(process.env.BACKEND_URL + "/api/login", 
 			  {method: 'GET',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(data),
-			  })
+			  }) 
 		.then(response => response.json())
 		.then((response)=>{console.log(response)})
 
