@@ -20,6 +20,7 @@ export const Home = () => {
 				<Link to="/signup" type="button" className="btn btn-primary mx-3">SignUp</Link>
 				<Link to="/login" type="button" className="btn btn-secondary mx-3">Login</Link>
 				<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>
+				<Link to="/members" type="button" className="btn btn-success mx-3">Usuarios</Link>
 			</div>
 			<p>
 				This boilerplate comes with lots of documentation:{" "}

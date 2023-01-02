@@ -80,8 +80,6 @@ def get_user():
 #para probar y saber cuantos tengo
 @api.route('/members', methods=['GET'])
 def get_members():
-    print("hola")
-
     data = User.query.all()
     users = []
 

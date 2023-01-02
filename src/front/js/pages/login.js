@@ -12,6 +12,7 @@ export const Login = () => {
 	}
 	const hacerLogin = (evento) => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
+
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
 		console.log("Antes:", data, process.env.BACKEND_URL)
 
@@ -21,8 +22,7 @@ export const Login = () => {
 			   body: JSON.stringify(data),
 			  }) 
 		.then(response => response.json())
-		.then((response)=>{console.log(response)})
-
+		.then((response)=>{console.log("hacerLogin", response)})
 	}
 
 	return (
@@ -47,11 +47,6 @@ export const Login = () => {
 			</form>
 
 			<Link to="/" type="button" className="btn btn-success mx-3">Home</Link>
-
-
-
-
-
 
 			<div className="alert alert-info">
 			</div>
