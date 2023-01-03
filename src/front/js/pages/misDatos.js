@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
 
-export const Members = () => {
+export const MisDatos = () => {
 	const [miembros, setMiembros] = useState([{}]);
 
-	function getMembers(){
+	function getMember(){
 		let datos = [];
 		let myToken = localStorage.getItem("token");
 
@@ -21,7 +21,7 @@ export const Members = () => {
 	}
 
 	useEffect(() => {
-		getMembers();
+		getMember();
 	  },[]);
 
 	return (

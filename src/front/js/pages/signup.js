@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const Signup = () => {
 	const [formData, setFormData] = useState({});
-	const navega = useNavigate();
 
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
@@ -14,7 +13,8 @@ export const Signup = () => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 		// console.log("Antes:", formData, process.env.BACKEND_URL)
 
-		fetch(process.env.BACKEND_URL + "/api/signup", 
+		// fetch(process.env.BACKEND_URL + "/api/signup", 
+		fetch("https://3001-lavp999-autenticacion-ax05009bb6d.ws-eu80.gitpod.io/api/signup", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(formData),

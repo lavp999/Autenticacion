@@ -54,16 +54,16 @@ def signup():
 
 @api.route('/login', methods=['POST'])
 def login():
-    data = request.json
-
-    emailUser = data.get("user", None)
-    pwd = data.get("pwd", None)
+    emailUser = request.json.get("user", None)
+    pwd = request.json.get("pwd", None)
 
     user = User.query.filter_by(email=emailUser).filter_by(password=pwd).first()
+    # user = User.filter.query(email=emailUser, password=pwd).first()
 
     if user:
         access_token = create_access_token(identity=user.id)
-        return jsonify(access_token=access_token), 200
+        # return jsonify(access_token=access_token), 200
+        return jsonify({ "token": access_token, "user_id": user.id }), 200
     else:
         return jsonify({"msg": "Bad username or password"}), 401
 
@@ -71,9 +71,9 @@ def login():
 @api.route('/member', methods=['GET'])
 @jwt_required()
 def get_user():
-    userMail = get_jwt_identity()
-    print(userMail)
-    user = User.query.filter_by(email=userMail).first()
+    userId = get_jwt_identity()
+    print(userId)
+    user = User.query.filter_by(id=userId).first()
 
     return jsonify(user.serialize()), 200
 

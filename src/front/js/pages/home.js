@@ -21,6 +21,7 @@ export const Home = () => {
 				<Link to="/login" type="button" className="btn btn-secondary mx-3">Login</Link>
 				<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>
 				<Link to="/members" type="button" className="btn btn-success mx-3">Usuarios</Link>
+				<Link to="/member" type="button" className="btn btn-success mx-3">Mis Datos</Link>
 			</div>
 			<p>
 				This boilerplate comes with lots of documentation:{" "}

@@ -16,13 +16,15 @@ export const Login = () => {
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
 		console.log("Antes:", data, process.env.BACKEND_URL)
 
-		fetch(process.env.BACKEND_URL + "/api/login", 
+		fetch("https://3001-lavp999-autenticacion-ax05009bb6d.ws-eu80.gitpod.io/api/login", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(data),
 			  }) 
 		.then(response => response.json())
-		.then((response)=>{console.log("hacerLogin", response)})
+		.then((response)=>{	console.log("hacerLogin", response)
+							localStorage.setItem("token", response["token"]);
+			 })
 	}
 
 	return (
