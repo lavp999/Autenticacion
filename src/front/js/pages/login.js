@@ -17,7 +17,7 @@ export const Login = () => {
 		console.log("Antes:", data, process.env.BACKEND_URL)
 
 		fetch(process.env.BACKEND_URL + "/api/login", 
-			  {method: 'GET',
+			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(data),
 			  }) 

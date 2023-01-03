@@ -16,36 +16,19 @@ export const Members = () => {
 		.then((response)=>{	console.log("response: ", response);
 			  				datos = response;
 							setMiembros(response);
-							//datos.forEach(e => {
-							//	setMiembros([...miembros, {"email" : e["email"]}])
-							//});
 			 })
-
 	}
 
 	useEffect(() => {
 		getMembers();
-	  });
-
-	const lista = () => {
-		const miLi = miembros.map((e, i) => {return ("<li>" +  e["email"] + "</li>")})
-
-
-		console.log(miLi);
-		return "Adios";
-	}
+	  },[]);
 
 	return (
 		<div className="text-center mt-5">
 			<h1>listado de miembros</h1>
 			{console.log("datos", miembros)}
 			<ul>
-				<li>{miembros[0]["email"]}</li>
-				{(miembros.length == 0) ? 'Cargando.....' : miembros.map((e, i) => {return ("<li>" + e["email"] + "</li>")})}
-				{miembros.forEach((e) =>{
-										"<li>"+ e["email"] +"</li>"
-										})
-				}
+				{(miembros.length == 0) ? 'Cargando.....' : miembros.map((e, i) => {return (<li> {e["email"]} </li>)})}
 			</ul>
 
 

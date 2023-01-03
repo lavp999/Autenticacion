@@ -52,7 +52,7 @@ def signup():
         return jsonify(access_token=access_token), 200
 
 
-@api.route('/login', methods=['GET'])
+@api.route('/login', methods=['POST'])
 def login():
     data = request.json
 
@@ -62,7 +62,7 @@ def login():
     user = User.query.filter_by(email=emailUser).filter_by(password=pwd).first()
 
     if user:
-        access_token = create_access_token(identity=emailUser)
+        access_token = create_access_token(identity=user.id)
         return jsonify(access_token=access_token), 200
     else:
         return jsonify({"msg": "Bad username or password"}), 401
