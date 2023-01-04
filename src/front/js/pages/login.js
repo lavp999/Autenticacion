@@ -1,12 +1,11 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext";
+import React, { useState } from "react";
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 
 export const Login = () => {
-	const { store, actions } = useContext(Context);
 	const [formData, setFormData] = useState({});
-
+	const navigate = useNavigate();
+	
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
@@ -14,9 +13,9 @@ export const Login = () => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
-		console.log("Antes:", data, process.env.BACKEND_URL)
+		console.log("login Antes:", data, process.env.BACKEND_URL)
 
-		fetch("https://3001-lavp999-autenticacion-ax05009bb6d.ws-eu80.gitpod.io/api/login", 
+		fetch(process.env.BACKEND_URL + "/api/login", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(data),
@@ -24,6 +23,7 @@ export const Login = () => {
 		.then(response => response.json())
 		.then((response)=>{	console.log("hacerLogin", response)
 							localStorage.setItem("token", response["token"]);
+							navigate("/");
 			 })
 	}
 

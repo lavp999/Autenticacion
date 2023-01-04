@@ -9,7 +9,7 @@ export const Members = () => {
 		let datos = [];
 		let myToken = localStorage.getItem("token");
 
-		fetch("https://3001-lavp999-autenticacion-ax05009bb6d.ws-eu80.gitpod.io/api/members", 
+		fetch(process.env.BACKEND_URL + "/api/members", 
 			  {method: 'GET',
 			   headers:{"Content-Type": "application/json", "Authorization": myToken}
 			  }) 

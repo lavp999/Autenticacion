@@ -9,7 +9,7 @@ export const MisDatos = () => {
 		let datos = [];
 		let myToken = localStorage.getItem("token");
 
-		fetch("https://3001-lavp999-autenticacion-ax05009bb6d.ws-eu80.gitpod.io/api/members", 
+		fetch(process.env.BACKEND_URL + "/api/members", 
 			  {method: 'GET',
 			   headers:{"Content-Type": "application/json", "Authorization": myToken}
 			  }) 
@@ -26,7 +26,7 @@ export const MisDatos = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<h1>listado de miembros</h1>
+			<h1>Mis Datos</h1>
 			{console.log("datos", miembros)}
 			<ul>
 				{(miembros.length == 0) ? 'Cargando.....' : miembros.map((e, i) => {return (<li key={i}> {e["email"]} </li>)})}
