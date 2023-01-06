@@ -29,7 +29,7 @@ export const Members = () => {
 			<h1>listado de miembros</h1>
 			{console.log("datos", miembros)}
 			<ul>
-				{(miembros.length == 0) ? 'Cargando.....' : miembros.map((e, i) => {return (<li key={i}> {e["email"]} </li>)})}
+				{(miembros.length == 0) ? 'Cargando.....' : miembros.map((e, i) => {return (<li key={i}> {e["email"]} ({e["nombre"]}) </li>)})}
 			</ul>
 
 
