@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Link , useNavigate } from "react-router-dom";
 
 export const Login = () => {
 	const [formData, setFormData] = useState({});
+	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
 	
 	const handleChange = (evento) =>{
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
-	const hacerLogin = (evento) => {
+	const hacerLogin = (evento) => { 
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
@@ -21,9 +23,14 @@ export const Login = () => {
 			   body: JSON.stringify(data),
 			  }) 
 		.then(response => response.json())
-		.then((response)=>{	console.log("hacerLogin", response)
-							localStorage.setItem("token", response["token"]);
-							navigate("/");
+		.then((response)=>{	console.log("hacerLogin", typeof response["token"], response)
+			  				if(typeof response["token"] === 'undefined'){
+								actions.setMensaje(response);
+								navigate("/login");
+							}else{
+								localStorage.setItem("token", response["token"]);
+								navigate("/");
+							}
 			 })
 	}
 

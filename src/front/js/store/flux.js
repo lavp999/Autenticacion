@@ -14,12 +14,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			tokenUser: "",
+			mensaje: "",
 			datosSignup: {user: "inicial",
 						  pwd: "inicial"
 						 }		
 		},
 		actions: {
+			//--------------------------------------------------------------------
+			// Asignar un valor a mensaje
+			//--------------------------------------------------------------------
+			setMensaje: (msg) => {
+				setStore({ mensaje: msg });
+			},
 			//--------------------------------------------------------------------
 			// Guardamos datos de usuario en el signup 
 			//--------------------------------------------------------------------
