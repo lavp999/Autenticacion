@@ -25,10 +25,12 @@ export const Login = () => {
 		.then(response => response.json())
 		.then((response)=>{	console.log("hacerLogin", typeof response["token"], response)
 			  				if(typeof response["token"] === 'undefined'){
-								actions.setMensaje(response);
+								actions.setMensaje("Mi mensaje");
 								navigate("/login");
 							}else{
 								localStorage.setItem("token", response["token"]);
+								actions.setUserConectado(response["token"], 'pwd');
+								console.log("hacer Login2", actions.getUserConectado());
 								navigate("/");
 							}
 			 })

@@ -15,9 +15,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			mensaje: "",
-			datosSignup: {user: "inicial",
-						  pwd: "inicial"
-						 }		
+			userConectado: {user: "",
+						    pwd: ""
+						   }		
 		},
 		actions: {
 			//--------------------------------------------------------------------
@@ -26,10 +26,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setMensaje: (msg) => {
 				setStore({ mensaje: msg });
 			},
+
 			//--------------------------------------------------------------------
 			// Guardamos datos de usuario en el signup 
 			//--------------------------------------------------------------------
-			setSignup: (usuario, pass) => {
+			setUserConectado: (usuario, pass) => {
 				const misDatos = {user: usuario,
 								  pwd: pass}
 
@@ -38,10 +39,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// ------------
 					// Buscamos si existe el usuario
 					
-
-					setStore({ datosSignup: misDatos });
-					// console.log("Estos son mis datos: ", misDatos);
-						return data;
+					setStore({ userConectado: misDatos });
+					// console.log("Estos son mis datos: ", userConectado);
 				}catch(error){
 					console.log("Error en la validación de datos", error)
 				}
@@ -49,8 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//--------------------------------------------------------------------
 			// retornamos datos de usuario en el signup
 			//--------------------------------------------------------------------
-			getSignup: () => {
-				return getStore().datosSignup;
+			getUserConectado: () => {
+				return getStore().userConectado;
 			},
 
 
