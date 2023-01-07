@@ -29,7 +29,7 @@ export const Login = () => {
 								navigate("/login");
 							}else{
 								localStorage.setItem("token", response["token"]);
-								actions.setUserConectado(response["token"], 'pwd');
+								actions.setUserConectado(response["nombre"], 'pwd');
 								console.log("hacer Login2", actions.getUserConectado());
 								navigate("/");
 							}
