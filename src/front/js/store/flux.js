@@ -16,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			mensaje: "",
 			userConectado: {user: "",
-						    pwd: ""
+							token: ""
 						   }		
 		},
 		actions: {
@@ -30,9 +30,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//--------------------------------------------------------------------
 			// Guardamos datos de usuario en el signup 
 			//--------------------------------------------------------------------
-			setUserConectado: (usuario, pass) => {
+			setUserConectado: (usuario, miToken) => {
 				const misDatos = {user: usuario,
-								  pwd: pass}
+								  token: miToken}
 
 				try{
 					// Validamos datos de entrada
