@@ -40,12 +40,16 @@ def insert_test_data(count):
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
+    print("Alta ---------------------------------------: ");
+    print(data);
+    print("Alta ---------------------------------------: ");
     user = User.query.filter_by(email=data['user']).first()
 
     if user:
         return jsonify({"msg": "No se puede crear este usuario"}), 401
     else:
         user = User(nombre=data['nombre'], email=data['user'], password=data['pwd'], is_active=True)
+        # user = User(email=data['user'], password=data['pwd'], is_active=True)
         db.session.add(user)
         db.session.commit()
         access_token = create_access_token(identity=data['user'])

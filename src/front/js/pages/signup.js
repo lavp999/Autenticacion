@@ -14,6 +14,7 @@ export const Signup = () => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 		console.log("signup antes :", formData, process.env.BACKEND_URL)
 
+		// fetch(process.env.BACKEND_URL + "https://3000-lavp999-autenticacion-9sfvliaa4b5.ws-eu81.gitpod.io/api/signup", 
 		fetch(process.env.BACKEND_URL + "/api/signup", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
@@ -46,7 +47,7 @@ signup.js:17                  Uncaught (in promise) TypeError: Failed to fetch
 			<form onSubmit={handleSubmit}>
 				<div className="row">
 					<div className="col form-group">
-						<input type="text" className="form-control" id="InputNombre" value={"Luis A. Vicente"} name="nombre" onChange={handleChange}/>
+						<input type="text" className="form-control" id="InputNombre" name="nombre" onChange={handleChange}/>
 					</div>
 					<div className="col form-group">
 						<input type="email" className="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="user" onChange={handleChange}/>
