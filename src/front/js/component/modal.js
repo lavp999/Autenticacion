@@ -1,9 +1,9 @@
 import React from "react";
 import "../../styles/home.css";
 
-const Modal = ({props , children}) => {
+const Modal = ({children}) => {
     return (
-        <article className="modal is-open">
+        <div className="modal is-open">
             <div className="modal.container">
                 <button className="modal-close">X</button>
                 <p>que hay aquí?</p>
@@ -14,7 +14,7 @@ const Modal = ({props , children}) => {
                 <img src={props.img}></img>
                 */}
             </div>
-        </article>
+        </div>
     )
 }
 

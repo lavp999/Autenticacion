@@ -2,16 +2,18 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modals from "../component/modals";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const usuario = actions.getUserConectado();
+	const navigate = useNavigate();
 
 	const logout = () => {
 		{console.log("logout1:", localStorage.getItem('token'), localStorage.getItem('token') == null, localStorage.getItem('token') == 'null', localStorage.getItem('token') === null)}
 		localStorage.removeItem('token');
+		navigate('/');
 		{console.log("logout2:", localStorage.getItem('token'), localStorage.getItem('token') == null, localStorage.getItem('token') == 'null', localStorage.getItem('token') === null)}
 	}
 
@@ -50,7 +52,3 @@ export const Home = () => {
 		</div>
 	);
 };
-{/*
-<button className="btn btn-secondary mx-3" onClick={logout}>Logout</button>     
-															  
-*/}
