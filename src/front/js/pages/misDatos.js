@@ -12,7 +12,8 @@ export const MisDatos = () => {
 
 		fetch(process.env.BACKEND_URL + "/api/member", 
 			  {method: 'GET',
-			   headers:{"Content-Type": "application/json", "Authorization": myToken}
+			   headers:{"Content-Type": "application/json"
+			   		   ,"Authorization": 'Bearer ' + myToken}
 			  }) 
 		.then(response => response.json())
 		.then((response)=>{	console.log("response: ", typeof response["msg"], response["msg"], response);
@@ -21,30 +22,44 @@ export const MisDatos = () => {
 								console.log("datosUser: ", datosUser);
 							}else{
 								setDatosUser({"msg": "No estás autorizado par ver esta página"});
-								navigate("/");
 							}
 							;
 			 })
 	}
 
+
+	const sinPermisos = () => {
+		return (<div className="card tarjeta">
+					<img className="card-img-top" src="https://placeimg.com/200/200/people" alt="yo mismo" />
+					<div className="card-body">
+						<h5 className="card-title">Mis Datos</h5>
+						<p className="card-text">Estos son mis datos!!</p>
+						<p className="card-text">Nombre: {datosUser["nombre"]} </p>
+						<p className="card-text">Email: {datosUser["email"]} </p>		
+						<p className="card-text">Activo?: {datosUser["is_active"]} </p>
+					</div>
+				</div>);
+	}
+
+	const conPermisos = () => {
+		return (<div> 
+					<h1 className="card-title">{datosUser["msg"]}</h1> 
+				</div>);
+	}
+
+
 	useEffect(() => {
 		getMember();
 	  },[]);
 
-	return (
+	return ( 
+		
 		<div className="text-center mt-5">
-			<div className="card tarjeta">
-				<img className="card-img-top" src="https://placeimg.com/200/200/people" alt="yo mismo" />
-				<div className="card-body">
-					<h5 className="card-title">Mis Datos</h5>
-					<p className="card-text">Estos son mis datos!!</p>
-					<p className="card-text">Nombre: {datosUser["nombre"]} </p>
-					<p className="card-text">Email: {datosUser["email"]} </p>					
-					<p className="card-text">Activo?: {datosUser["is_active"]} </p>					
-				</div>
-			</div>
+			{datosUser["msg"] ? conPermisos() : sinPermisos()}
 			
-			<Link to="/" type="button" className="btn btn-success mx-3">Home</Link>
+			<div className="alert alert-info">
+				<Link to="/" type="button" className="btn btn-primary mx-3">Home</Link>
+			</div>
 		</div>
 	);
 };

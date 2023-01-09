@@ -78,8 +78,11 @@ def get_user():
     userId = get_jwt_identity()
     print(userId)
     user = User.query.filter_by(id=userId).first()
+    if user: 
+        return jsonify(user.serialize()), 200
+    else:
+        return jsonify({"msg", "no existe ya usuario para la sesión"}), 401
 
-    return jsonify(user.serialize()), 200
 
 #para probar y saber cuantos tengo
 @api.route('/members', methods=['GET'])

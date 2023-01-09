@@ -15,7 +15,7 @@ export const Login = () => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
-		console.log("login Antes:", data, process.env.BACKEND_URL)
+		console.log("login Antes:", data, process.env.BACKEND_URL) 
 
 		fetch(process.env.BACKEND_URL + "/api/login", 
 			  {method: 'POST',
@@ -31,7 +31,7 @@ export const Login = () => {
 								localStorage.setItem("token", response["token"]);
 								actions.setUserConectado(response["nombre"], response["token"]);
 								console.log("hacer Login2", actions.getUserConectado());
-								navigate("/");
+								navigate("/"); 
 							}
 			 })
 	}

@@ -37,7 +37,7 @@ export const Home = () => {
 				{(localStorage.getItem('token') == null) ?  <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login2</Link> : 
 															<Link to="/" 		type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout2.1</Link> }
 				
-				<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>
+				{/*<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>*/}
 				<Link to="/members" type="button" className="btn btn-success mx-3">Usuarios</Link>
 				<Link to="/member" 	type="button" className="btn btn-success mx-3">Mis Datos</Link>
 				<Link to="/" 		type="button" className="btn btn-secondary mx-3">Home</Link>
