@@ -1,30 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/home.css";
 import { Link , useNavigate } from "react-router-dom";
+import { getMember } from "../utils";
 
 export const MisDatos = () => {
 	const [datosUser, setDatosUser] = useState({});
 	const navigate = useNavigate();
 
-	function getMember(){
-		let myToken = localStorage.getItem("token");
-		console.log("estoy autenticado?", myToken);
-
-		fetch(process.env.BACKEND_URL + "/api/member", 
-			  {method: 'GET',
-			   headers:{"Content-Type": "application/json"
-			   		   ,"Authorization": 'Bearer ' + myToken}
-			  }) 
-		.then(response => response.json())
-		.then((response)=>{	console.log("response: ", typeof response["msg"], response["msg"], response);
-			  				if(typeof response["msg"] === 'undefined'){
-								setDatosUser(response);
-								console.log("datosUser: ", datosUser);
-							}else{
-								setDatosUser({"msg": "No estás autorizado par ver esta página"});
-							}
-							;
-			 })
+	function Buscar(){
+		getMember();
 	}
 
 
@@ -49,7 +33,7 @@ export const MisDatos = () => {
 
 
 	useEffect(() => {
-		getMember();
+		Buscar();
 	  },[]);
 
 	return ( 
@@ -63,3 +47,29 @@ export const MisDatos = () => {
 		</div>
 	);
 };
+
+
+/*
+
+function Buscar(){
+		let myToken = localStorage.getItem("token");
+		console.log("estoy autenticado?", myToken);
+
+		fetch(process.env.BACKEND_URL + "/api/member", 
+			  {method: 'GET',
+			   headers:{"Content-Type": "application/json"
+			   		   ,"Authorization": 'Bearer ' + myToken}
+			  }) 
+		.then(response => response.json())
+		.then((response)=>{	console.log("response: ", typeof response["msg"], response["msg"], response);
+			  				if(typeof response["msg"] === 'undefined'){
+								setDatosUser(response);
+								console.log("datosUser: ", datosUser);
+							}else{
+								setDatosUser({"msg": "No estás autorizado par ver esta página"});
+							}
+							;
+			 })
+	}
+
+*/

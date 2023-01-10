@@ -27,14 +27,8 @@ export const Home = () => {
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
 			</div>
 			<div className="alert alert-info">
-				{console.log("SignUp:", localStorage.getItem('token'), localStorage.getItem('token') == null, localStorage.getItem('token') == 'null', localStorage.getItem('token') === null)}
-
-				{(localStorage.getItem('token') == 'null') && <Link to="/signup" type="button" className="btn btn-primary mx-3">SignUp1</Link> } 
-				{(localStorage.getItem('token') == 'null') ?  <Link to="/login"  type="button" className="btn btn-secondary mx-3">Login1</Link> : 
-															  <Link to="/" 		 type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout1.1</Link> }
-				
-				{(localStorage.getItem('token') == null) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp2</Link> } 
-				{(localStorage.getItem('token') == null) ?  <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login2</Link> : 
+				{(localStorage.getItem('token')) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp2</Link> } 
+				{(localStorage.getItem('token')) ?  <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login2</Link> : 
 															<Link to="/" 		type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout2.1</Link> }
 				
 				{/*<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>*/}

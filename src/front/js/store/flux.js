@@ -16,7 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			mensaje: "",
 			userConectado: {user: "",
-							token: ""
+							nombre: "", 
+							is_active: true
 						   }		
 		},
 		actions: {
@@ -30,9 +31,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//--------------------------------------------------------------------
 			// Guardamos datos de usuario en el signup 
 			//--------------------------------------------------------------------
-			setUserConectado: (usuario, miToken) => {
-				const misDatos = {user: usuario,
-								  token: miToken}
+			setUserConectado: (usuario, miNombre, activo=true) => {
+				const misDatos = {user: usuario
+								 ,nombre: miNombre
+								 ,is_active: activo}
 
 				try{
 					// Validamos datos de entrada

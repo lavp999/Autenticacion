@@ -28,6 +28,7 @@ export const Login = () => {
 								actions.setMensaje("Mi mensaje");
 							}else{
 								localStorage.setItem("token", response["token"]);
+								localStorage.setItem("id_user", response["user_id"]);
 								actions.setUserConectado(response["nombre"], response["token"]);
 								console.log("hacer Login2", actions.getUserConectado());
 								navigate("/"); 
@@ -87,3 +88,34 @@ export const Login = () => {
 		</div>
 	);
 };
+
+
+
+/*
+	const hacerLogin = (evento) => { 
+		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
+
+		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
+		console.log("login Antes:", data, process.env.BACKEND_URL) 
+
+		fetch(process.env.BACKEND_URL + "/api/login", 
+			  {method: 'POST',
+			   headers:{"Content-Type": "application/json"},
+			   body: JSON.stringify(data),
+			  }) 
+		.then(response => response.json())
+		.then((response)=>{	console.log("hacerLogin", typeof response["token"], response)
+			  				if(typeof response["token"] === 'undefined'){
+								actions.setMensaje("Mi mensaje");
+							}else{
+								localStorage.setItem("token", response["token"]);
+								localStorage.setItem("id_user", response["user_id"]);
+								actions.setUserConectado(response["nombre"], response["token"]);
+								console.log("hacer Login2", actions.getUserConectado());
+								navigate("/"); 
+							}
+			 })
+	}
+
+
+*/

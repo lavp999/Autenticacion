@@ -29,7 +29,8 @@ const injectContext = PassedComponent => {
 			 * store, instead use actions, like this:
 			 **/
 			state.actions.getMessage(); // <---- calling this function from the flux.js actions
-			localStorage.getItem("token");
+			localStorage.getItem('token');
+			localStorage.getItem('id_user');
 			// Recoger datos
 		}, []);
 
