@@ -1,24 +1,31 @@
-import { useContext }    from "react";
-import { Context } from "./store/appContext";
-
-export const getMember = () => {
-    const {store, actions} = useContext(Context);
-    let result = 200;
-    let myToken = localStorage.getItem("token");
+/**
+ * 
+ * @returns:
+ *      0 -> es que ha ido OK y se ha encontrado dato, por lo que "contenido" retorna u  objeto con Email, nombre y activo
+ *      1 -> Es que no ha encontrado al usuario, por lo que "contenido" tendrán un objeto con un msg
+ *     -1 -> Es un error no controlado
+ */
+export function getMember( contenido ){
+    const myToken = localStorage.getItem("token");
+    let ret = -1;
 
     fetch(process.env.BACKEND_URL + "/api/member", 
             {method: 'GET',
-            headers:{"Content-Type": "application/json"
+             headers:{"Content-Type": "application/json"
                     ,"Authorization": 'Bearer ' + myToken}
             }) 
     .then(response => response.json())
-    .then((response)=>{	console.log("Response a parte", response)
+    .then((response)=>{	
                         if(typeof response["msg"] === 'undefined'){
-                            actions.setMensaje(response);
-                            result = 401;
+                            console.log("Response a parte1", response);
+                            ret = 0;
+                            contenido = {"email": response["email"]
+                                        ,"nombre": response["nombre"]
+                                        ,"is_active": response["is_active"] }
                         }else{
-                            actions.setUserConectado(response["email"], response["nombre"], response["is_active"])
+                            console.log("Response a parte2", response);
+                            ret = 1;
+                            contenido = response;
                         };
             });
-    return result;
 };

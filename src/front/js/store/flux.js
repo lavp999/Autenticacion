@@ -27,6 +27,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setMensaje: (msg) => {
 				setStore({ mensaje: msg });
 			},
+			getMensaje: () => {
+				return getStore().mensaje;
+			},
 
 			//--------------------------------------------------------------------
 			// Guardamos datos de usuario en el signup 
