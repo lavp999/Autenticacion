@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getState from "./flux.js";
+import { getMember } from "../utils";
 
 // Don't change, here is where we initialize our context, by default it's just going to be null.
 export const Context = React.createContext(null);
@@ -28,11 +29,20 @@ const injectContext = PassedComponent => {
 			 * you should do your ajax requests or fetch api requests here. Do not use setState() to save data in the
 			 * store, instead use actions, like this:
 			 **/
-			state.actions.getMessage(); // <---- calling this function from the flux.js actions
-			localStorage.getItem('token');
-			localStorage.getItem('id_user');
-			// Recoger datos
-		}, []);
+
+			let respuesta = {};
+			getMember(respuesta);
+
+			console.log("respuesta Ini: ", respuesta);
+
+			if(store.mensaje["msg"] != "undefined"){
+				actions.setMensaje(respuesta);
+				console.log("mensaje1: ", store.mensaje["msg"], actions.getMensaje(respuesta));
+			}else{
+				actions.setUserConectado(respuesta["email"], respuesta["nombre"], respuesta["is_active"])
+				console.log("user1: ", store.userConectado["email"]);
+			};
+			}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
 		// the context will now have a getStore, getActions and setStore functions available, because they were declared

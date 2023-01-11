@@ -27,7 +27,6 @@ export const MisDatos = () => {
 				});
 	}
 
-
 	const sinPermisos = () => {
 		return (<div className="card tarjeta">
 					<img className="card-img-top" src="https://placeimg.com/200/200/people" alt="yo mismo" />
@@ -47,7 +46,6 @@ export const MisDatos = () => {
 				</div>);
 	}
 
-
 	useEffect(() => {
 		let respuesta = {};
 		
@@ -61,11 +59,9 @@ export const MisDatos = () => {
 			actions.setUserConectado(respuesta["email"], respuesta["nombre"], respuesta["is_active"])
 			console.log("user: ", store.userConectado["email"]);
 		};
-		// Buscar();
-	  },[]);
+	},[]);
 
 	return ( 
-		
 		<div className="text-center mt-5">
 			{store.mensaje["msg"] ? sinPermisos() : conPermisos()}
 			
