@@ -15,10 +15,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			mensaje: "",
-			userConectado: {user: "",
-							nombre: "", 
-							is_active: true
-						   }		
+			userConectado: {} //{user: "",
+							  // nombre: "", 
+							  // is_active: true
+						      //}		
 		},
 		actions: {
 			//--------------------------------------------------------------------
@@ -49,6 +49,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}catch(error){
 					console.log("Error en la validación de datos", error)
 				}
+			},
+			delUserConectado: () => {
+				setStore({ userConectado: {} });
 			},
 			//--------------------------------------------------------------------
 			// retornamos datos de usuario en el signup

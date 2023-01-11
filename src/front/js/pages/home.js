@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
@@ -11,10 +11,9 @@ export const Home = () => {
 	const navigate = useNavigate();
 
 	const logout = () => {
-		{console.log("logout1:", localStorage.getItem('token'), localStorage.getItem('token') == null, localStorage.getItem('token') == 'null', localStorage.getItem('token') === null)}
 		localStorage.removeItem('token');
+		actions.delUserConectado()
 		navigate('/');
-		{console.log("logout2:", localStorage.getItem('token'), localStorage.getItem('token') == null, localStorage.getItem('token') == 'null', localStorage.getItem('token') === null)}
 	}
 
 	return (
@@ -27,9 +26,13 @@ export const Home = () => {
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
 			</div>
 			<div className="alert alert-info">
-				{(localStorage.getItem('token')) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp2</Link> } 
+				{!(usuario["user"]) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp</Link> } 
+				{!(usuario["user"])  ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login</Link> : 
+									   <Link to="/" 		type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout</Link> }
+				
+				{/*(localStorage.getItem('token')) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp2</Link> } 
 				{(localStorage.getItem('token')) ?  <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login2</Link> : 
-															<Link to="/" 		type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout2.1</Link> }
+															<Link to="/" 		type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout2.1</Link> */}
 				
 				{/*<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>*/}
 				<Link to="/members" type="button" className="btn btn-success mx-3">Usuarios</Link>
