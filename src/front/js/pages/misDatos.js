@@ -32,7 +32,7 @@ export const MisDatos = () => {
 		getMember(respuesta);
 		console.log("esta respuesta: ", respuesta);
 
-		if(store.mensaje["msg"] != "undefined"){
+		if(respuesta["msg"] != "undefined"){
 			actions.setMensaje(respuesta);
 			console.log("mensaje: ", store.mensaje["msg"], actions.getMensaje(respuesta));
 		}else{
