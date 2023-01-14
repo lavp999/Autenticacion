@@ -95,6 +95,7 @@ To update with all yours tables you can edit the file app.py and go to the line 
 -   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
 
 1. Install the packages: `$ npm install`
+                                              npm install react-bootstrap bootstrap
 2. Start coding! start the webpack dev server `$ npm run start`
 
 ## Publish your website!

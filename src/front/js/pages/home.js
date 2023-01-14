@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link, useNavigate } from "react-router-dom";
-import Modals from "../component/modals";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -30,10 +29,6 @@ export const Home = () => {
 				{!(usuario["user"])  ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login</Link> : 
 									   <Link to="/" 		type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout</Link> }
 				
-				{/*(localStorage.getItem('token')) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp2</Link> } 
-				{(localStorage.getItem('token')) ?  <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login2</Link> : 
-															<Link to="/" 		type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout2.1</Link> */}
-				
 				{/*<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>*/}
 				<Link to="/members" type="button" className="btn btn-success mx-3">Usuarios</Link>
 				<Link to="/member" 	type="button" className="btn btn-success mx-3">Mis Datos</Link>
@@ -45,7 +40,6 @@ export const Home = () => {
 					Read documentation
 				</a>
 			</p>
-			<Modals/>
 		</div>
 	);
 };
