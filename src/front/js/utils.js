@@ -5,12 +5,14 @@
  *      1 -> Es que no ha encontrado al usuario, por lo que "contenido" tendrán un objeto con un msg
  *     -1 -> Es un error no controlado
  */
-export async function getMember( contenido ){
+import React, { useContext } from "react";
+import { Context } from "./store/appContext";
+
+export async function getMember(  ){ 
     const myToken = localStorage.getItem("token");
+    const { actions, store } = useContext(Context);
 
-    contenido = {"msg": "No entramos ni en el fetch"}
-
-    await fetch(process.env.BACKEND_URL + "/api/member", 
+    fetch(process.env.BACKEND_URL + "/api/member", 
             {method: 'GET',
              headers:{"Content-Type": "application/json"
                     ,"Authorization": 'Bearer ' + myToken}
@@ -19,11 +21,10 @@ export async function getMember( contenido ){
     .then((response)=>{	
                         if(typeof response["msg"] === 'undefined'){
                             console.log("Response a parte1", response);
-                            contenido = response;
-                            console.log("Response a parte1.1", contenido);
+                            actions.setUserConectado(null, null, null, response["msg"]);
                         }else{
                             console.log("Response a parte2", response);
-                            contenido = response;
+                            actions.setUserConectado(respuesta["user"],respuesta["nombre"],respuesta["is_active"]);
                         };
             });
 };

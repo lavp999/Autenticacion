@@ -31,8 +31,9 @@ const injectContext = PassedComponent => {
 			 **/
 
 			let respuesta = {};
-			getMember(respuesta);
+			getMember(respuesta).then(()=>{console.log("Response en appcontext", response);});
 			console.log("useEffect ---> ", respuesta);
+			state.actions.setUserConectado(respuesta["user"],respuesta["nombre"],respuesta["is_active"])
 
 			}, []);
 
