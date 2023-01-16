@@ -1,49 +1,55 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
-import { getMember } from "../utils";
 
 export const MisDatos = () => {
 	const {store, actions} = useContext(Context);
+	const myToken = localStorage.getItem("token");
+	const [mensaje, setMensaje] = useState({});
 
-	const sinPermisos = () => {
+	const conPermisos = () => {
 		return (<div className="card tarjeta">
 					<img className="card-img-top" src="https://placeimg.com/200/200/people" alt="yo mismo" />
 					<div className="card-body">
 						<h5 className="card-title">Mis Datos</h5>
 						<p className="card-text">Estos son mis datos!!</p>
-						<p className="card-text">Nombre: {store.userConectado["nombre"]} </p>
-						<p className="card-text">Email: {store.userConectado["email"]} </p>		
-						<p className="card-text">Activo?: {store.userConectado["is_active"]} </p>
+						<p className="card-text">Nombre: {store.userDatos["nombre"]} </p>
+						<p className="card-text">Email: {store.userDatos["user"]} </p>		
+						<p className="card-text">Activo?: {store.userDatos["is_active"]} </p>
 					</div>
 				</div>);
 	}
 
-	const conPermisos = () => {
+	const sinPermisos = () => {
 		return (<div> 
-					<h1 className="card-title">Mensaje: {store.mensaje["msg"]}</h1> 
+					<h1 className="card-title">Mensaje: {mensaje["msg"]}</h1> 
 				</div>);
 	}
 
 	useEffect(() => {
-		let respuesta = {};
-		
-		getMember(respuesta);
-		console.log("esta respuesta: ", respuesta);
+		fetch(process.env.BACKEND_URL + "/api/member", 
+				{method: 'GET',
+					headers:{"Content-Type": "application/json"
+						,"Authorization": 'Bearer ' + myToken}
+				}) 
+		.then((response) => {response.json()})
+		.then((response)=>{	if(response["msg"]){
+								console.log("Response a parte1", response);
+								setMensaje(response);
+							}else{
+								console.log("Response a parte2", response);
+								actions.setUserDatos(response["user"], response["nombre"], response["is_Active"]);
+								setMensaje({});
+							};
+				});
 
-		if(respuesta["msg"] != "undefined"){
-			actions.setMensaje(respuesta);
-			console.log("mensaje: ", store.mensaje["msg"], actions.getMensaje(respuesta));
-		}else{
-			actions.setUserConectado(respuesta["email"], respuesta["nombre"], respuesta["is_active"])
-			console.log("user: ", store.userConectado["email"]);
-		};
 	},[]);
 
 	return ( 
 		<div className="text-center mt-5">
-			{store.mensaje["msg"] ? sinPermisos() : conPermisos()}
+			{console.log("Logado? ", mensaje["msg"], store.userDatos["email"])}
+			{mensaje["msg"] ? sinPermisos() : conPermisos()}
 			
 			<div className="alert alert-info">
 				<Link to="/" type="button" className="btn btn-primary mx-3">Home</Link>
@@ -51,37 +57,3 @@ export const MisDatos = () => {
 		</div>
 	);
 };
-
-
-/*
-
-function Buscar(){
-		let myToken = localStorage.getItem("token");
-		console.log("estoy autenticado?", myToken);
-
-		fetch(process.env.BACKEND_URL + "/api/member", 
-			  {method: 'GET',
-			   headers:{"Content-Type": "application/json"
-			   		   ,"Authorization": 'Bearer ' + myToken}
-			  }) 
-		.then(response => response.json())
-		.then((response)=>{	console.log("response: ", typeof response["msg"], response["msg"], response);
-			  				if(typeof response["msg"] === 'undefined'){
-								setDatosUser(response);
-								console.log("datosUser: ", datosUser);
-							}else{
-								setDatosUser({"msg": "No estás autorizado par ver esta página"});
-							}
-							;
-			 })
-	}
-
-
-
-
-	function Buscar(){
-		const resultado = getMember();
-	}
-
-
-*/

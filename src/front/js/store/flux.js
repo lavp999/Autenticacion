@@ -14,67 +14,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			mensaje: "",
-			userConectado: {} //{user: "",
-							  // nombre: "", 
-							  // is_active: true
-						      //}		
+			logado: false,
+ 			userDatos: {}	// {user: "",
+							// nombre: "", 
+							// is_active: true
+						    //}		
 		},
 		actions: {
 			//--------------------------------------------------------------------
-			// Asignar un valor a mensaje
+			// Cargar la variable Token de usuario
 			//--------------------------------------------------------------------
-			setMensaje: (msg) => {
-				setStore({ mensaje: msg });
-			},
-			getMensaje: () => {
-				return getStore().mensaje;
+			setLogado: (estado) => {
+				setStore({logado: estado});
 			},
 
 			//--------------------------------------------------------------------
 			// Guardamos datos de usuario en el signup 
-			//--------------------------------------------------------------------
-			setUserConectado: (usuario, miNombre, activo=true) => {
-				const misDatos = {user: usuario
-								 ,nombre: miNombre
-								 ,is_active: activo}
-
+			//-------------------------------------------------------------------- 
+			setUserDatos: (usuario, miNombre, activo=true) => {
 				try{
+					// ------------
 					// Validamos datos de entrada
 					// ------------
-					// Buscamos si existe el usuario
 					
-					setStore({ userConectado: misDatos });
-					// console.log("Estos son mis datos: ", userConectado);
+					// ------------
+					// Guardamos la información
+					// ------------
+					setStore({ userDatos: {"user": usuario
+										  ,"nombre": miNombre
+										  ,"is_active": activo} });
 				}catch(error){
 					console.log("Error en la validación de datos", error)
 				}
 			},
-			delUserConectado: () => {
-				setStore({ userConectado: {} });
-			},
-			//--------------------------------------------------------------------
-			// retornamos datos de usuario en el signup
-			//--------------------------------------------------------------------
-			getUserConectado: () => {
-				return getStore().userConectado;
-			},
-
-
-
-			//--------------------------------------------------------------------
-			// Cargar la variable Token de usuario
-			//--------------------------------------------------------------------
-			asignaToken: (miToken) => {
-				setStore({tokenUser: miToken});
+			getUserDatos: () => {
+				try{
+					setStore({ userDatos: {"user": usuario
+										  ,"nombre": miNombre
+										  ,"is_active": activo} });
+				}catch(error){
+					console.log("Error en la validación de datos", error)
+				}
 			},
 
 
-
-
-
-
-
+			iniciaUserDatos: () => {
+				setStore({ userDatos: {} });
+			},
 
 			//--------------------------------------------------------------------
 			// Use getActions to call a function within a fuction

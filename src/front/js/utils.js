@@ -21,10 +21,22 @@ export async function getMember(  ){
     .then((response)=>{	
                         if(typeof response["msg"] === 'undefined'){
                             console.log("Response a parte1", response);
-                            actions.setUserConectado(null, null, null, response["msg"]);
+                            // actions.setUserNoConectado(response["msg"]);
                         }else{
                             console.log("Response a parte2", response);
-                            actions.setUserConectado(respuesta["user"],respuesta["nombre"],respuesta["is_active"]);
+                            //actions.setUserConectado(respuesta["user"],respuesta["nombre"],respuesta["is_active"]);
                         };
             });
 };
+
+
+
+export const logout = () => {
+    const { actions, store } = useContext(Context);
+    
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    actions.setLogado(false);
+    actions.iniciaUserDatos()
+    navigate('/');
+}

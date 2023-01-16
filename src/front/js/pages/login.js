@@ -7,6 +7,7 @@ import { Link , useNavigate } from "react-router-dom";
 
 export const Login = () => {
 	const [formData, setFormData] = useState({});
+	const [mensaje, setMensaje] = useState({});
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
 
@@ -21,7 +22,6 @@ export const Login = () => {
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
-		console.log("login Antes:", data, process.env.BACKEND_URL)  
 
 		fetch(process.env.BACKEND_URL + "/api/login", 
 			  {method: 'POST',
@@ -29,33 +29,32 @@ export const Login = () => {
 			   body: JSON.stringify(data),
 			  }) 
 		.then(response => response.json())
-		.then((response)=>{	console.log("hacerLogin", typeof response["token"], response)
-			  				if(typeof response["token"] === 'undefined'){
-								actions.setMensaje(response["msg"]);
-								handleShow();
-							}else{
+		.then((response)=>{	console.log("hacerLogin", response)
+			  				if(response["token"]){
 								localStorage.setItem("token", response["token"]);
 								localStorage.setItem("id_user", response["user_id"]);
-								actions.setUserConectado(response["user"], response["nombre"], response["is_Active"]);
-								console.log("hacer Login2", actions.getUserConectado());
+								actions.setUserDatos(response["user"], response["nombre"], response["is_Active"]);
+								actions.setLogado(true);
+								// getMember(respuesta).then();
 								handleClose();
 								navigate("/"); 
+							}else{
+								actions.iniciaUserDatos();
+								actions.setLogado(false);
+								setMensaje(response);
+								handleShow();
 							}
 			 })
 	}
 
-	function Example() {
+	function ModalAceptar() {
 		return (
 		  <>
-			<Button variant="primary" onClick={handleShow}>
-			  Launch demo modal
-			</Button>
-	  
 			<Modal show={show} onHide={handleClose}>
 			  <Modal.Header closeButton>
-				<Modal.Title>Modal heading</Modal.Title>
+				<Modal.Title> Error en el login de usuario</Modal.Title>
 			  </Modal.Header>
-			  <Modal.Body>{store.mensaje}</Modal.Body>
+			  <Modal.Body>{mensaje["msg"]}</Modal.Body>
 			  <Modal.Footer>
 				<Button variant="secondary" onClick={handleClose}>
 				  Close
@@ -89,7 +88,7 @@ export const Login = () => {
 
 			<Link to="/" type="button" className="btn btn-success mx-3">Home</Link>
 
-			{Example()}	
+			{ModalAceptar()}	
 		</div>
 	);
 };

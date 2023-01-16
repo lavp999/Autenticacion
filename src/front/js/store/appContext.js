@@ -29,12 +29,12 @@ const injectContext = PassedComponent => {
 			 * you should do your ajax requests or fetch api requests here. Do not use setState() to save data in the
 			 * store, instead use actions, like this:
 			 **/
-
+			/*
 			let respuesta = {};
-			getMember(respuesta).then(()=>{console.log("Response en appcontext", response);});
+			getMember().then(()=>{console.log("Response en appcontext", response);});
 			console.log("useEffect ---> ", respuesta);
 			state.actions.setUserConectado(respuesta["user"],respuesta["nombre"],respuesta["is_active"])
-
+			*/
 			}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

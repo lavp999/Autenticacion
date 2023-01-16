@@ -4,7 +4,6 @@ import { Context } from "../store/appContext";
 
 export const Navbar = () => {
 	const {store, actions} =  useContext( Context);
-	const usuario = actions.getUserConectado();
 
 	return (
 		<nav className="navbar navbar-light bg-light">
@@ -13,7 +12,7 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
 				</Link>
 				<div className="ml-auto">
-						<p>{(usuario["user"] === '') ? "kkk" : usuario["user"]}</p>
+						<p>{(store.userDatos["user"]) ? store.userDatos["nombre"] : "No conectado"}</p>
 				</div>
 				<div className="ml-auto">
 					<Link to="/demo">
