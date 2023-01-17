@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
+import { MI_RUTA } from "../../js/utils"
 
 export const MisDatos = () => {
 	const {store, actions} = useContext(Context);
@@ -28,13 +29,19 @@ export const MisDatos = () => {
 	}
 
 	useEffect(() => {
-		fetch("https://3001-lavp999-autenticacion-ncqqkxqbi51.ws-eu82.gitpod.io/api/member", 
+		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : MI_RUTA);
+
+		console.log("Mi Ruta: ", mi_ruta);
+
+		fetch(mi_ruta + "/api/member", 
 				{method: 'GET',
 					headers:{"Content-Type": "application/json"
 						,"Authorization": 'Bearer ' + myToken}
 				}) 
-		.then((response) => {response.json()})
-		.then((response)=>{	if(response["msg"]){
+		.then((response) => {response.json();
+							 console.log("que trae response", response.status)})
+		.then((response)=>{	console.log("que trae response2", response.status);
+							if(response["msg"]){
 								console.log("Response a parte1", response);
 								setMensaje(response);
 							}else{
@@ -42,13 +49,16 @@ export const MisDatos = () => {
 								actions.setUserDatos(response["user"], response["nombre"], response["is_Active"]);
 								setMensaje({});
 							};
+				})
+		.catch(error => {
+					setMensaje({msg: error.toString()});
 				});
 
 	},[]);
 
 	return ( 
 		<div className="text-center mt-5">
-			{mensaje && console.log("Logado? ", mensaje["msg"], store.userDatos["email"])}
+			{mensaje && console.log("Logado? ", mensaje, store.userDatos["email"])}
 			{store.logado ? conPermisos() : sinPermisos()}
 			
 			<div className="alert alert-info">

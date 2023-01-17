@@ -11,11 +11,11 @@ export const Signup = () => {
 	}
 
 	const handleSubmit = (evento)=>{
+		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : "https://3001-lavp999-autenticacion-dfpovy53i8j.ws-eu82.gitpod.io");
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("signup antes :", formData, process.env.BACKEND_URL)
+		console.log("signup antes :", formData)
 
-		// fetch(process.env.BACKEND_URL + "https://3000-lavp999-autenticacion-9sfvliaa4b5.ws-eu81.gitpod.io/api/signup", 
-		fetch("https://3001-lavp999-autenticacion-ncqqkxqbi51.ws-eu82.gitpod.io/api/signup", 
+		fetch( mi_ruta + "/api/signup", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(formData),

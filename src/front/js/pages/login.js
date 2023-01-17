@@ -19,11 +19,12 @@ export const Login = () => {
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
 	const hacerLogin = (evento) => { 
+		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : "https://3001-lavp999-autenticacion-dfpovy53i8j.ws-eu82.gitpod.io");
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
 
-		fetch("https://3001-lavp999-autenticacion-ncqqkxqbi51.ws-eu82.gitpod.io/api/login", 
+		fetch(mi_ruta + "/api/login", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(data),
