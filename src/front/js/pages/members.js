@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
+import { MI_RUTA } from "../../js/utils"
 
 export const Members = () => {
 	const [miembros, setMiembros] = useState([{}]);
 
 	function getMembers(){
+		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : MI_RUTA);
 		let datos = [];
 		let myToken = localStorage.getItem("token");
 
-		fetch("https://3001-lavp999-autenticacion-ncqqkxqbi51.ws-eu82.gitpod.io/api/members", 
+		fetch(mi_ruta + "/api/members", 
 			  {method: 'GET',
 			   headers:{"Content-Type": "application/json", "Authorization": myToken}
 			  }) 

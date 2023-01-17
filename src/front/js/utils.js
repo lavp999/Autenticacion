@@ -8,7 +8,7 @@
 import React, { useContext } from "react";
 import { Context } from "./store/appContext";
 
-export const MI_RUTA = "https://3001-lavp999-autenticacion-dfpovy53i8j.ws-eu82.gitpod.io";
+export const MI_RUTA = "https://3001-lavp999-autenticacion-1m8bpui2gkw.ws-eu82.gitpod.io";
 
 export async function getMember(  ){ 
     const myToken = localStorage.getItem("token");

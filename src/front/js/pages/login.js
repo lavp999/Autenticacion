@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Link , useNavigate } from "react-router-dom";
+import { MI_RUTA } from "../../js/utils"
 
 export const Login = () => {
 	const [formData, setFormData] = useState({});
@@ -19,7 +20,7 @@ export const Login = () => {
 		setFormData({...formData, [evento.target.name]: evento.target.value});
 	}
 	const hacerLogin = (evento) => { 
-		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : "https://3001-lavp999-autenticacion-dfpovy53i8j.ws-eu82.gitpod.io");
+		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : MI_RUTA);
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 

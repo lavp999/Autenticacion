@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
-// import { logout } from "../utils";
+import { logout } from "../utils";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -30,10 +30,8 @@ export const Home = () => {
 				{!(store.logado) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp</Link> } 
 				{!(store.logado) ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login</Link> : 
 									   <button type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout</button> }
-				{!(store.userDatos["user"]) ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login 2</Link> : 
-									   <button type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout 2</button> }
 				
-				<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>
+				{/* <Link to="/private" type="button" className="btn btn-success mx-3">Private</Link> */}
 				<Link to="/members" type="button" className="btn btn-success mx-3">Usuarios</Link>
 				<Link to="/member" 	type="button" className="btn btn-success mx-3">Mis Datos</Link>
 			</div>

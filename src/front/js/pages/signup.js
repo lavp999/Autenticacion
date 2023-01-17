@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/home.css";
 import { Link, useNavigate } from "react-router-dom";
+import { MI_RUTA } from "../../js/utils"
 
 export const Signup = () => {
 	const [formData, setFormData] = useState({});
@@ -11,7 +12,7 @@ export const Signup = () => {
 	}
 
 	const handleSubmit = (evento)=>{
-		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : "https://3001-lavp999-autenticacion-dfpovy53i8j.ws-eu82.gitpod.io");
+		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : MI_RUTA);
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
 		console.log("signup antes :", formData)
 
@@ -26,21 +27,7 @@ export const Signup = () => {
 			 })
 
 	}
-/*
-Access to fetch at 'https://3001-lavp999-autenticacion-z1lxowc4ql4.ws-eu81.gitpod.io/api/signup' from origin 'https://3000-lavp999-autenticacion-z1lxowc4ql4.ws-eu81.gitpod.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
-signup.js:17          POST https://3001-lavp999-autenticacion-z1lxowc4ql4.ws-eu81.gitpod.io/api/signup net::ERR_FAILED 500
-handleSubmit @ signup.js:17
-callCallback @ react-dom.development.js:188
-invokeGuardedCallbackDev @ react-dom.development.js:237
-invokeGuardedCallback @ react-dom.development.js:292
-.......
-discreteUpdates$1 @ react-dom.development.js:21887
-discreteUpdates @ react-dom.development.js:806
-dispatchDiscreteEvent @ react-dom.development.js:4168
-signup.js:17                  Uncaught (in promise) TypeError: Failed to fetch
-    at handleSubmit (signup.js:17:1)
-    at HTMLUnknownElement.callCallback (reac
-*/
+
 	return (
 		<div className="text-center mt-5">
 			<h1>Esta es la pagina de alta</h1>

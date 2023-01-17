@@ -40,7 +40,7 @@ export const MisDatos = () => {
 				}) 
 		.then((response) => {response.json();
 							 console.log("que trae response", response.status)})
-		.then((response)=>{	console.log("que trae response2", response.status);
+		.then((response)=>{
 							if(response["msg"]){
 								console.log("Response a parte1", response);
 								setMensaje(response);
@@ -51,7 +51,7 @@ export const MisDatos = () => {
 							};
 				})
 		.catch(error => {
-					setMensaje({msg: error.toString()});
+					setMensaje({msg: "No tienes permisos para entrar en esta sección ("+ error.toString() + ")"});
 				});
 
 	},[]);
