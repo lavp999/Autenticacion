@@ -6,7 +6,7 @@ import "../../styles/home.css";
 export const MisDatos = () => {
 	const {store, actions} = useContext(Context);
 	const myToken = localStorage.getItem("token");
-	const [mensaje, setMensaje] = useState({});
+	const [mensaje, setMensaje] = useState();
 
 	const conPermisos = () => {
 		return (<div className="card tarjeta">
@@ -23,12 +23,12 @@ export const MisDatos = () => {
 
 	const sinPermisos = () => {
 		return (<div> 
-					<h1 className="card-title">Mensaje: {mensaje["msg"]}</h1> 
+					<h1 className="card-title">Mensaje: {mensaje && mensaje["msg"]}</h1> 
 				</div>);
 	}
 
 	useEffect(() => {
-		fetch(process.env.BACKEND_URL + "/api/member", 
+		fetch("https://3001-lavp999-autenticacion-ncqqkxqbi51.ws-eu82.gitpod.io/api/member", 
 				{method: 'GET',
 					headers:{"Content-Type": "application/json"
 						,"Authorization": 'Bearer ' + myToken}
@@ -48,8 +48,8 @@ export const MisDatos = () => {
 
 	return ( 
 		<div className="text-center mt-5">
-			{console.log("Logado? ", mensaje["msg"], store.userDatos["email"])}
-			{mensaje["msg"] ? sinPermisos() : conPermisos()}
+			{mensaje && console.log("Logado? ", mensaje["msg"], store.userDatos["email"])}
+			{store.logado ? conPermisos() : sinPermisos()}
 			
 			<div className="alert alert-info">
 				<Link to="/" type="button" className="btn btn-primary mx-3">Home</Link>

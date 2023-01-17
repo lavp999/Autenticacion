@@ -15,7 +15,7 @@ export const Signup = () => {
 		console.log("signup antes :", formData, process.env.BACKEND_URL)
 
 		// fetch(process.env.BACKEND_URL + "https://3000-lavp999-autenticacion-9sfvliaa4b5.ws-eu81.gitpod.io/api/signup", 
-		fetch(process.env.BACKEND_URL + "/api/signup", 
+		fetch("https://3001-lavp999-autenticacion-ncqqkxqbi51.ws-eu82.gitpod.io/api/signup", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(formData),

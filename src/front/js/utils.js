@@ -31,12 +31,12 @@ export async function getMember(  ){
 
 
 
-export const logout = () => {
+export const logout = (setLogado, iniciaUserDatos) => {
     const { actions, store } = useContext(Context);
     
     localStorage.removeItem('token');
     localStorage.removeItem('id');
-    actions.setLogado(false);
-    actions.iniciaUserDatos()
-    navigate('/');
+    setLogado(false);
+    iniciaUserDatos()
+
 }

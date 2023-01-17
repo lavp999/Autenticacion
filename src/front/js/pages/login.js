@@ -23,7 +23,7 @@ export const Login = () => {
 
 		const data = {"user": formData["user"], "pwd": formData["pwd"]} 
 
-		fetch(process.env.BACKEND_URL + "/api/login", 
+		fetch("https://3001-lavp999-autenticacion-ncqqkxqbi51.ws-eu82.gitpod.io/api/login", 
 			  {method: 'POST',
 			   headers:{"Content-Type": "application/json"},
 			   body: JSON.stringify(data),

@@ -3,10 +3,18 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
-import { logout } from "../utils";
+// import { logout } from "../utils";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+
+	const logout = () => {
+		localStorage.removeItem('token');
+		localStorage.removeItem('id');
+		actions.setLogado(false);
+		actions.iniciaUserDatos()
+	
+	}
 
 	return (
 		<div className="text-center mt-5">
@@ -19,10 +27,11 @@ export const Home = () => {
 			</div>
 			<div className="alert alert-info">
 				{console.log("Home:",store.logado, store.userDatos)}
-				{!(store.logado) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp 2</Link> } 
-				{!(store.userDatos["user"]) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp</Link> } 
-				{!(store.userDatos["user"]) ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login</Link> : 
-									   <Link to="/" 		type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout</Link> }
+				{!(store.logado) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp</Link> } 
+				{!(store.logado) ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login</Link> : 
+									   <button type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout</button> }
+				{!(store.userDatos["user"]) ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login 2</Link> : 
+									   <button type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout 2</button> }
 				
 				<Link to="/private" type="button" className="btn btn-success mx-3">Private</Link>
 				<Link to="/members" type="button" className="btn btn-success mx-3">Usuarios</Link>
@@ -37,3 +46,10 @@ export const Home = () => {
 		</div>
 	);
 };
+
+/**
+ * 
+ * 				{!(store.logado) ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login</Link> : 
+									   <button type="button" className="btn btn-secondary mx-3" onClick={()=>{logout(actions.setLogado(false), actions.iniciaUserDatos())}}>Logout</button> }
+
+ */
