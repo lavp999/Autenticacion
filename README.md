@@ -98,6 +98,6 @@ To update with all yours tables you can edit the file app.py and go to the line 
                                               npm install react-bootstrap bootstrap
 2. Start coding! start the webpack dev server `$ npm run start`
 
-## Publish your website!
+## Publish your website! 
 
 This boilerplate it's 100% read to deploy with Render.com and Herkou in a matter of minutes. Please read the [official documentation about it](https://start.4geeksacademy.com/deploy).

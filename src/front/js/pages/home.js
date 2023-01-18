@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
-import { logout } from "../utils";
+// import { logout } from "../utils";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -13,7 +13,6 @@ export const Home = () => {
 		localStorage.removeItem('id');
 		actions.setLogado(false);
 		actions.iniciaUserDatos()
-	
 	}
 
 	return (

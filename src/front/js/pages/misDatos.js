@@ -38,8 +38,14 @@ export const MisDatos = () => {
 					headers:{"Content-Type": "application/json"
 						,"Authorization": 'Bearer ' + myToken}
 				}) 
-		.then((response) => {response.json();
-							 console.log("que trae response", response.status)})
+		.then((response) => {console.log("que trae response", response.status)
+							 if(){
+							 	return response.json();
+							 }else{
+								return {"msg": "Error "}
+
+							 }
+							})
 		.then((response)=>{
 							if(response["msg"]){
 								console.log("Response a parte1", response);
