@@ -31,17 +31,12 @@ export const MisDatos = () => {
 	useEffect(() => {
 		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : MI_RUTA);
 
-		console.log("Mi Ruta: ", mi_ruta);
-
 		fetch(mi_ruta + "/api/member", 
 				{method: 'GET',
-					headers:{"Content-Type": "application/json"
+				headers:{"Content-Type": "application/json"
 						,"Authorization": 'Bearer ' + myToken}
 				}) 
-		.then((response) => {if(response.status = 200){
-							 	return response.json();
-							 }
-							})
+		.then((response) => {if(response.status = 200){return response.json(); } })
 		.then((response)=>{	if(response["msg"]){
 								setMensaje(response);
 							}else{

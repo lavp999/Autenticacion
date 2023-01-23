@@ -29,12 +29,9 @@ export const Members = () => {
 	return (
 		<div className="text-center mt-5">
 			<h1>listado de miembros</h1>
-			{console.log("datos", miembros)}
 			<ul>
 				{(miembros.length == 0) ? 'Cargando.....' : miembros.map((e, i) => {return (<li key={i}> {e["email"]} ({e["nombre"]}) </li>)})}
 			</ul>
-
-
 			<Link to="/" type="button" className="btn btn-success mx-3">Home</Link>
 		</div>
 	);

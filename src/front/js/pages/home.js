@@ -7,12 +7,6 @@ import { Link } from "react-router-dom";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	const logout = () => {
-		console.log("Uno",localStorage.getItem('token'));
-		actions.iniciaUserDatos()
-		console.log("dos",localStorage.getItem('token'));
-	}
-
 	return (
 		<div className="text-center mt-5">
 			<h1>Hello {(store.userDatos["nombre"]) ? store.userDatos["nombre"] : "" }!!</h1>
@@ -25,7 +19,7 @@ export const Home = () => {
 			<div className="alert alert-info">
 				{!(store.logado) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp</Link> } 
 				{!(store.logado) ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login</Link> : 
-									   <button type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout</button> }
+									   <button type="button" className="btn btn-secondary mx-3" onClick={actions.iniciaUserDatos}>Logout</button> }
 				
 				{/* <Link to="/private" type="button" className="btn btn-success mx-3">Private</Link> */}
 				<Link to="/members" type="button" className="btn btn-success mx-3">Usuarios</Link>
