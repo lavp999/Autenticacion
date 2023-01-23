@@ -43,6 +43,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ userDatos: {"user": usuario
 										  ,"nombre": miNombre
 										  ,"is_active": activo} });
+					setStore({logado : true});
+
 				}catch(error){
 					console.log("Error en la validación de datos", error)
 				}
@@ -59,7 +61,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			iniciaUserDatos: () => {
+				localStorage.removeItem('token');
+				localStorage.removeItem('id');
 				setStore({ userDatos: {} });
+				setStore({logado : false});
 			},
 
 			//--------------------------------------------------------------------

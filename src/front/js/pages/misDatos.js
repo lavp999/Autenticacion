@@ -17,7 +17,7 @@ export const MisDatos = () => {
 						<p className="card-text">Estos son mis datos!!</p>
 						<p className="card-text">Nombre: {store.userDatos["nombre"]} </p>
 						<p className="card-text">Email: {store.userDatos["user"]} </p>		
-						<p className="card-text">Activo?: {store.userDatos["is_active"]} </p>
+						<p className="card-text">Activo?: {(store.userDatos["is_active"] ? "Si" : "No")} </p>
 					</div>
 				</div>);
 	}
@@ -38,20 +38,13 @@ export const MisDatos = () => {
 					headers:{"Content-Type": "application/json"
 						,"Authorization": 'Bearer ' + myToken}
 				}) 
-		.then((response) => {console.log("que trae response", response.status)
-							 if(){
+		.then((response) => {if(response.status = 200){
 							 	return response.json();
-							 }else{
-								return {"msg": "Error "}
-
 							 }
 							})
-		.then((response)=>{
-							if(response["msg"]){
-								console.log("Response a parte1", response);
+		.then((response)=>{	if(response["msg"]){
 								setMensaje(response);
 							}else{
-								console.log("Response a parte2", response);
 								actions.setUserDatos(response["user"], response["nombre"], response["is_Active"]);
 								setMensaje({});
 							};
@@ -64,8 +57,7 @@ export const MisDatos = () => {
 
 	return ( 
 		<div className="text-center mt-5">
-			{mensaje && console.log("Logado? ", mensaje, store.userDatos["email"])}
-			{store.logado ? conPermisos() : sinPermisos()}
+			{store.logado ? conPermisos() : sinPermisos()} 
 			
 			<div className="alert alert-info">
 				<Link to="/" type="button" className="btn btn-primary mx-3">Home</Link>

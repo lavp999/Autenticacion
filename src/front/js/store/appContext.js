@@ -35,6 +35,7 @@ const injectContext = PassedComponent => {
 			console.log("useEffect ---> ", respuesta);
 			state.actions.setUserConectado(respuesta["user"],respuesta["nombre"],respuesta["is_active"])
 			*/
+			state.actions.setLogado(false);
 			}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

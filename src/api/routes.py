@@ -40,9 +40,6 @@ def insert_test_data(count):
 @api.route('/signup', methods=['POST'])
 def signup():
     data = request.json
-    print("Alta ---------------------------------------: ");
-    print(data);
-    print("Alta ---------------------------------------: ");
     user = User.query.filter_by(email=data['user']).first()
 
     if user:
@@ -69,21 +66,18 @@ def login():
         # return jsonify(access_token=access_token), 200
         return jsonify({ "token": access_token, "user_id": user.id, "nombre" : user.nombre, "user": user.email, "is_active": user.is_active }), 200
     else:
-        return jsonify({"msg": "Bad username or password"}), 401
+        return jsonify({"msg": "Nombre de usuario y/o pwd incorrectos."}), 401
 
 
 @api.route('/member', methods=['GET'])
 @jwt_required()
 def get_user():
     userId = get_jwt_identity()
-    print('---------------------------')
-    print(userId)
-    print('---------------------------')
     user = User.query.filter_by(id=userId).first()
     if user: 
         return jsonify(user.serialize()), 200
     else:
-        return jsonify({"msg": "no existe ya usuario para la sesión"}), 401
+        return jsonify({"msg": "no existe usuario para la sesión"}), 401
 
 
 #para probar y saber cuantos tengo

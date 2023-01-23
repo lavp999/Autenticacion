@@ -31,18 +31,14 @@ export const Login = () => {
 			   body: JSON.stringify(data),
 			  }) 
 		.then(response => response.json())
-		.then((response)=>{	console.log("hacerLogin", response)
-			  				if(response["token"]){
+		.then((response)=>{	if(response["token"]){
 								localStorage.setItem("token", response["token"]);
 								localStorage.setItem("id_user", response["user_id"]);
 								actions.setUserDatos(response["user"], response["nombre"], response["is_Active"]);
-								actions.setLogado(true);
-								// getMember(respuesta).then();
 								handleClose();
 								navigate("/"); 
 							}else{
 								actions.iniciaUserDatos();
-								actions.setLogado(false);
 								setMensaje(response);
 								handleShow();
 							}

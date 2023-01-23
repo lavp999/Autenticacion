@@ -3,16 +3,14 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
-// import { logout } from "../utils";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	const logout = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem('id');
-		actions.setLogado(false);
+		console.log("Uno",localStorage.getItem('token'));
 		actions.iniciaUserDatos()
+		console.log("dos",localStorage.getItem('token'));
 	}
 
 	return (
@@ -25,7 +23,6 @@ export const Home = () => {
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
 			</div>
 			<div className="alert alert-info">
-				{console.log("Home:",store.logado, store.userDatos)}
 				{!(store.logado) && <Link to="/signup" 	type="button" className="btn btn-primary mx-3">SignUp</Link> } 
 				{!(store.logado) ? <Link to="/login" 	type="button" className="btn btn-secondary mx-3">Login</Link> : 
 									   <button type="button" className="btn btn-secondary mx-3" onClick={logout}>Logout</button> }

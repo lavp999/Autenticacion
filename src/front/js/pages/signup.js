@@ -14,7 +14,6 @@ export const Signup = () => {
 	const handleSubmit = (evento)=>{
 		const mi_ruta = (process.env.BACKEND_URL ? process.env.BACKEND_URL : MI_RUTA);
 		evento.preventDefault(); // para evitar la recarga ya que cancela el evento
-		console.log("signup antes :", formData)
 
 		fetch( mi_ruta + "/api/signup", 
 			  {method: 'POST',
@@ -22,10 +21,7 @@ export const Signup = () => {
 			   body: JSON.stringify(formData),
 			  })
 		.then(response => response.json())
-		.then((response)=>{	console.log(response)
-							navigate("/login");
-			 })
-
+		.then((response)=>{	navigate("/login") })
 	}
 
 	return (
@@ -49,9 +45,7 @@ export const Signup = () => {
 				</div>
 			</form>
 
-
 			<div className="alert alert-info">
-				{/*<Link to="/okSignup" type="button" onClick={guardaDatos} className="btn btn-primary mx-3">SignUp</Link> */} 
 				<Link to="/" type="button" className="btn btn-success mx-3">Home</Link>
 			</div>
 		</div>
